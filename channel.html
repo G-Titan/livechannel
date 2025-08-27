@@ -5,7 +5,25 @@
   <title>Deezer Channel</title>
 </head>
 <body>
-  <!-- Deezer requires this as a bridge for cross-domain messaging -->
+  <div id="player" style="width:100%; height:80px;"></div>
   <script src="https://e-cdns-files.dzcdn.net/js/min/dz.js"></script>
+  <script>
+    DZ.init({
+      appId: 'YOUR_APP_ID',
+      channelUrl: 'YOUR_CHANNEL_URL',
+      player: {
+        container: 'player',
+        width: '100%',   // take full WebView width
+        height: 80,      // adjust height to taste
+        onload: function() {
+          console.log('Deezer player loaded');
+        }
+      }
+    });
+
+    DZ.login(function(response) {
+      if (response.authResponse) console.log('Logged in');
+    }, {perms:'basic_access,email,manage_library'});
+  </script>
 </body>
 </html>
